@@ -1,9 +1,10 @@
-package com.leprincesylvain.altentest.technicaltest
+package com.leprincesylvain.altentest.technicaltest.ui
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.leprincesylvain.altentest.technicaltest.R
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream

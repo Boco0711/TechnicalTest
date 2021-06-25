@@ -20,11 +20,28 @@ class DevicesViewModel(
 
     fun getDevices() {
         //println("here we get new data" + devices.value!![0].deviceName)
-        job = Coroutines.ioThenMain(
-            {
-                repository.getData().devices
-            },
-            { _devices.value = it as MutableList<Device>? }
+        if(repository.devices.value == null) {
+            println("here _device is null " + (devices.value?.size ?: String()))
+
+            job = Coroutines.ioThenMain(
+                {
+                    repository.getData().devices
+                },
+                { _devices.value = it as MutableList<Device>}
+            )
+            insertAllDevice()
+        }
+    }
+
+    fun insertAllDevice() {
+        println("here we insert data")
+        job = Coroutines.ioThenMain({
+            println("here Fire")
+            repository.insertAllDevice(repository.getData().devices)
+            println("here Fire too")
+        },
+            {}
+            //{ _devices.value = it as MutableList<Device>}
         )
     }
 

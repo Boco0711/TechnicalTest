@@ -9,7 +9,7 @@ import androidx.navigation.Navigation
 import com.leprincesylvain.altentest.technicaltest.R
 import com.leprincesylvain.altentest.technicaltest.data.network.DataApi
 import com.leprincesylvain.altentest.technicaltest.data.repository.DataRepository
-import kotlinx.android.synthetic.main.devices_fragment.*
+import com.leprincesylvain.altentest.technicaltest.room.DataDatabase
 import kotlinx.android.synthetic.main.profile_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,8 +30,8 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
 
 
         val api = DataApi()
-        val repository = DataRepository(api)
-
+        val dao = DataDatabase.getDataDatabase(this.requireContext()).dataDao()
+        val repository = DataRepository(dao, api)
         factory = UserViewModelFactory(repository)
         viewModel = ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
 

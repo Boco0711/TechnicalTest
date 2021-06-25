@@ -5,4 +5,5 @@ import com.leprincesylvain.altentest.technicaltest.data.model.Device
 
 interface RecyclerViewClickListener {
     fun onRecyclerViewItemClick(view: View, device: Device)
+    fun onItemModified(device: Device)
 }

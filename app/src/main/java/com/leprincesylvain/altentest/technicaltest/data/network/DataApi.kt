@@ -15,7 +15,6 @@ interface DataApi {
         var retrofitService: DataApi? = null
         operator fun invoke(): DataApi {
             if (retrofitService == null) {
-                println("here retrofit is null")
                 retrofitService = Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl("http://storage42.com/modulotest/")
@@ -24,6 +23,5 @@ interface DataApi {
             }
             return retrofitService!!
         }
-
     }
 }

@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.leprincesylvain.altentest.technicaltest.R
 import com.leprincesylvain.altentest.technicaltest.data.model.Device
+import com.leprincesylvain.altentest.technicaltest.data.repository.DataRepository
 import com.leprincesylvain.altentest.technicaltest.databinding.RecyclerviewDeviceBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -20,6 +21,7 @@ class DevicesAdapter(
     private val devices: MutableList<Device>,
     private val listener: RecyclerViewClickListener
 ) : RecyclerView.Adapter<DevicesAdapter.DevicesViewHolder>(), Filterable {
+    val TAG = "TAG"
 
     var deviceFilterList = ArrayList<Device>()
     init {
@@ -76,20 +78,20 @@ class DevicesAdapter(
                 holder.recyclerviewDeviceBinding.seekBarTextview.text = device.intensity.toString()
                 holder.recyclerviewDeviceBinding.deviceSeekbar.max = 100
                 holder.recyclerviewDeviceBinding.deviceSeekbar.min = 0
-                holder.recyclerviewDeviceBinding.deviceSeekbar.progress = device.intensity
+                holder.recyclerviewDeviceBinding.deviceSeekbar.progress = device.intensity!!
             }
             "RollerShutter" -> {
                 holder.recyclerviewDeviceBinding.seekBarTextview.text = device.position.toString()
                 holder.recyclerviewDeviceBinding.deviceSeekbar.max = 100
                 holder.recyclerviewDeviceBinding.deviceSeekbar.min = 0
-                holder.recyclerviewDeviceBinding.deviceSeekbar.progress = device.position
+                holder.recyclerviewDeviceBinding.deviceSeekbar.progress = device.position!!
             }
             "Heater" -> {
                 holder.recyclerviewDeviceBinding.seekBarTextview.text =
                     device.temperature.toString()
                 holder.recyclerviewDeviceBinding.deviceSeekbar.max = 28
                 holder.recyclerviewDeviceBinding.deviceSeekbar.min = 7
-                holder.recyclerviewDeviceBinding.deviceSeekbar.progress = device.temperature
+                holder.recyclerviewDeviceBinding.deviceSeekbar.progress = device.temperature!!
             }
         }
         holder.recyclerviewDeviceBinding.deviceSeekbar.setOnSeekBarChangeListener(object :
@@ -100,6 +102,7 @@ class DevicesAdapter(
                 fromUser: Boolean
             ) {
                 holder.recyclerviewDeviceBinding.seekBarTextview.text = progress.toString()
+                listener.onItemModified(device)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {

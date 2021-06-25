@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TechnicalTest"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".ui.MainActivity"
             android:configChanges="orientation|screenSize"
             >
             <intent-filter>

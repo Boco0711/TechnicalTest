@@ -11,6 +11,7 @@ import com.leprincesylvain.altentest.technicaltest.R
 import com.leprincesylvain.altentest.technicaltest.data.model.Device
 import com.leprincesylvain.altentest.technicaltest.data.network.DataApi
 import com.leprincesylvain.altentest.technicaltest.data.repository.DataRepository
+import com.leprincesylvain.altentest.technicaltest.room.DataDatabase
 import kotlinx.android.synthetic.main.devices_fragment.*
 
 
@@ -18,6 +19,7 @@ class DevicesFragment : Fragment(), RecyclerViewClickListener {
 
     private lateinit var factory: DevicesViewModelFactory
     private lateinit var viewModel: DevicesViewModel
+    private lateinit var repository: DataRepository
     var adapter: DevicesAdapter? = null
 
 
@@ -33,8 +35,10 @@ class DevicesFragment : Fragment(), RecyclerViewClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         val api = DataApi()
-        val repository = DataRepository(api)
+        val dao = DataDatabase.getDataDatabase(this.requireContext()).dataDao()
+        repository = DataRepository(dao, api)
 
+        //repository = DataRepository(api)
         factory = DevicesViewModelFactory(repository)
         viewModel = ViewModelProviders.of(this, factory).get(DevicesViewModel::class.java)
 
@@ -79,5 +83,8 @@ class DevicesFragment : Fragment(), RecyclerViewClickListener {
 
     override fun onRecyclerViewItemClick(view: View, device: Device) {
 
+    }
+
+    override fun onItemModified(device: Device) {
     }
 }
