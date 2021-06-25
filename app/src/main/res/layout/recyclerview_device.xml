@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="device"
+            type="com.leprincesylvain.altentest.technicaltest.data.model.Device" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+
+            <TextView
+                android:id="@+id/device_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{device.deviceName}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/device_mode_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/device_name_text" />
+
+            <SeekBar
+                android:id="@+id/device_seekbar"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/device_name_text"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/seek_bar_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/device_seekbar"
+                android:layout_centerHorizontal="true" />
+
+
+            <Button
+                android:id="@+id/button_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="Delete" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</layout>
